@@ -1,11 +1,33 @@
 const request = require('supertest');
 require('dotenv').config();
 const app = require('../lib/app');
+const Dogs = require('../lib/models/Dogs');
 
 describe('dog bird farm for dogs and birds', () => {
 
-    // let createdDogs;
     // let createdBirds;
+    const dogs = [
+        { name: 'bruce', breed: 'poodle' },
+        { name: 'fluffy', breed: 'pomeranian' }
+    ];
+    
+    let createdDogs;
+
+    const creator = dog => {
+        return request(app).post('/dogs')
+            .send(dog);
+    };
+
+    beforeEach(() => {
+        return Dogs.drop();
+    });
+
+    beforeEach(() => {
+        return Promise.all(dogs.map(creator))
+            .then(ds => {
+                createdDogs = ds.map(d => d.body);
+            });
+    });
 
     it('creates a new dog in our db', () => {
         return request(app).post('/dogs')
@@ -18,6 +40,4 @@ describe('dog bird farm for dogs and birds', () => {
                 });
             });
     });
-
-
 });
