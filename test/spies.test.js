@@ -11,9 +11,9 @@ describe('spies model', () => {
 
     beforeEach(() => {
         return Promise.all([
-            Spies.create('James Bond', 'PP9', 'Aston Martin'),
-            Spies.create('Jack Ryan', 'Glock 19', 'Bike'),
-            Spies.create('Jason Bourne', 'Fists', 'Feet')
+            Spies.create({ name:'James Bond', weapon:'PP9', vehicle:'Aston Martin' }),
+            Spies.create({ name:'Jack Ryan', weapon:'Glock 19', vehicle:'Bike' }),
+            Spies.create({ name:'Jason Bourne', weapon:'Fists', vehicle:'Feet' })
         ])
             .then(cs => createdSpies = cs);
     });
@@ -33,7 +33,7 @@ describe('spies model', () => {
     });
 
     it('creates a new spy in my db', () => {
-        return Spies.create('Johnny English', 'Incompetence', 'Parachute')
+        return Spies.create({ name:'Johnny English', weapon:'Incompetence', vehicle:'Parachute' })
             .then(createdSpy => {
                 expect(createdSpy).toHaveProperty('_id');
                 expect(createdSpy.name).toEqual('Johnny English');

@@ -11,17 +11,17 @@ describe('Villains model', () => {
 
     beforeEach(() => {
         return Promise.all([
-            Villains.create('Alec Trevelyan', 'GoldenEye Satellite', 'Money'),
-            Villains.create('Mr Terrorist', 'Nuclear Warhead', 'Terror'),
-            Villains.create('Brian Cox', 'Hitmen', 'Coverup')
+            Villains.create({ name:'Alec Trevelyan', weapon:'GoldenEye Satellite', motive:'Money' }),
+            Villains.create({ name:'Mr Terrorist', weapon:'Nuclear Warhead', motive:'Terror' }),
+            Villains.create({ name:'Brian Cox', weapon:'Hitmen', motive:'Coverup' })
         ])
-            .then(createdVillainsFromPromise => {
-                createdVillains = createdVillainsFromPromise;
+            .then(cv => {
+                createdVillains = cv;
             });
     });
 
     it('creates a new villain in my db', () => {
-        return Villains.create('Sauvage', 'Poison', 'Hated Mr Bean')
+        return Villains.create({ name:'Sauvage', weapon:'Poison', motive:'Hated Mr Bean' })
             .then(createdVillain => {
                 expect(createdVillain).toHaveProperty('_id');
                 expect(createdVillain.name).toEqual('Sauvage');
