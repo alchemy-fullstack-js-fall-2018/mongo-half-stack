@@ -1,8 +1,23 @@
 require('dotenv').config();
 const request = require('supertest');
 const app = require('../lib/app');
+const Rodents = require('../lib/models/Rodents');
 
 describe('whale/rodent manager', () => {
+    let deerMouse = { species: 'Ixtlán Deer Mouse', status: 'Threatened' };
+    
+    beforeEach(() => {
+        Rodents.drop();
+    });
+
+    beforeEach(() => {
+        return request(app).post('/rodents')
+            .send(deerMouse)
+            .then(newDeerMouse => {
+                deerMouse = newDeerMouse.body;
+            });
+    });
+
     it('creates a rodent', () => {
         return request(app).post('/rodents')
             .send({ species: 'Red-Crested Tree-Rat', status: 'Threatened' })
@@ -28,10 +43,15 @@ describe('whale/rodent manager', () => {
     });
 
     it('APP gets all rodents in an array', () => {
+        let chinchilla = { species: 'Bolivian Chinchilla Rat', status: 'Threatened' };
         return request(app).post('/rodents')
-            .send([{ species: 'Bolivian Chinchilla Rat', status: 'Threatened' }, { species: 'Ixtlán Deer Mouse', status: 'Threatened' }])
+            .send(chinchilla)
             .then(createRes => {
-                console.log(createRes.body);
+                chinchilla = createRes.body;
+                return request(app).get('/rodents'); 
+            })
+            .then(getRes => {
+                expect(getRes.body).toEqual([deerMouse, chinchilla]);
             });
     });
 
