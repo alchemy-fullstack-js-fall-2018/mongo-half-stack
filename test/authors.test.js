@@ -53,4 +53,13 @@ describe('authors model', () => {
             
     });
 
+    it('updates an author by id', () => {
+        const revisedAuthor = createdAuthors[0];
+        revisedAuthor.lastName = 'LeGuin';
+        return Authors.update(revisedAuthor._id, revisedAuthor)
+            .then((updatedAuthor) => {
+                expect(updatedAuthor).toEqual(revisedAuthor);
+            });
+    });
+
 });
