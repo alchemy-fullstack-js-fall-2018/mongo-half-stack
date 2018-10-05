@@ -19,13 +19,19 @@ describe('whale/rodent manager', () => {
             .send({ species: 'Key Largo Woodrat', status: 'Endangered' })
             .then(createRes => {
                 const { _id } = createRes.body;
-                console.log(createRes.body);
                 return request(app).get(`/rodents/${_id}`);
             })
             .then(getRes => {
                 const rodent = getRes.body;
-                console.log(rodent);
                 expect(rodent._id).toEqual(expect.any(String));
+            });
+    });
+
+    it('APP gets all rodents in an array', () => {
+        return request(app).post('/rodents')
+            .send([{ species: 'Bolivian Chinchilla Rat', status: 'Threatened' }, { species: 'Ixtlán Deer Mouse', status: 'Threatened' }])
+            .then(createRes => {
+                console.log(createRes.body);
             });
     });
 
