@@ -70,4 +70,18 @@ describe('dog bird farm for dogs and birds', () => {
             });
     });
 
+    it('returns 404 when there is no method', () => {
+        return request(app)
+            .patch('/dogs')
+            .send({})
+            .then(res => {
+                expect(res.statusCode).toEqual(404);
+            });
+    });
+
+    it('returns 404 when no route', () => {
+        return request(app).get('/aardvarks').then(res => {
+            expect(res.statusCode).toEqual(404);
+        });
+    });
 });
