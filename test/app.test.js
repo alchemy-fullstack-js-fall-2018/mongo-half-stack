@@ -56,7 +56,6 @@ describe('Spies and Villains', () => {
     });
 
     it('kills a spy', () => {
-
         return request(app).delete(`/spies/${createdSpies[0]._id}`)
             .then(deadSpy => {
                 return request(app).get(`/spies/${deadSpy.body._id}`);
@@ -64,6 +63,22 @@ describe('Spies and Villains', () => {
             .then(res => {
                 expect(res.body).toBeNull();
             });
+    });
+
+    it('turns 007 into 008 (updates a spy)', () => {
+        return request(app).put(`/spies/${createdSpies[0]._id}`)
+            .send({ weapon: 'Seduction', vehicle: 'Love Boat' })
+            .then(res => {
+                expect(res.body).toEqual({
+                    _id: expect.any(String),
+                    name: 'James Bond',
+                    weapon: 'Seduction',
+                    vehicle: 'Love Boat'
+                });
+            });
+
+
+
 
 
     });
