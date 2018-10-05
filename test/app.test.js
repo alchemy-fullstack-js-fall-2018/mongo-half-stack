@@ -25,9 +25,14 @@ describe('Spies and Villains', () => {
     beforeEach(() => {
         return Promise.all(spies.map(creator))
             .then(cs => {
-                console.log(cs);
                 createdSpies = cs.map(s => s.body);
-                console.log(createdSpies);
+            });
+    });
+
+    it('get a spy by id', () => {
+        return request(app).get(`/spies/${createdSpies[0]._id}`)
+            .then(res => {
+                expect(res.body).toEqual(createdSpies[0]);
             });
     });
 
@@ -50,11 +55,17 @@ describe('Spies and Villains', () => {
             });
     });
 
-    it('get a spy by id', () => {
-        return request(app).get(`/spies/${createdSpies[0]._id}`)
+    it('kills a spy', () => {
+
+        return request(app).delete(`/spies/${createdSpies[0]._id}`)
+            .then(deadSpy => {
+                return request(app).get(`/spies/${deadSpy.body._id}`);
+            })
             .then(res => {
-                expect(res.body).toEqual(createdSpies[0]);
+                expect(res.body).toBeNull();
             });
+
+
     });
 
     it('returns 404 when there is no method', () => {
