@@ -33,11 +33,14 @@ describe('authors model', () => {
             });
     });
 
-    // it('gets all authors', () => {
-    //     return Authors.get()
-    //         .then(receivedAuthors => {
-    //             expect(receivedAuthors.length).
-    //         });
-    // });
+    it('gets all authors', () => {
+        return Authors.getAll()
+            .then(receivedAuthors => {
+                createdAuthors.forEach (createdAuthor => {
+                    expect(receivedAuthors).toContainEqual(createdAuthor);
+                });
+                
+            });
+    });
 
 });
