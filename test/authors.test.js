@@ -45,7 +45,7 @@ describe('authors model', () => {
 
     it('deletes an author by id', () => {
         return Authors.delete(createdAuthors[0]._id)
-            .then(Authors.getAll()) 
+            .then(() => Authors.getAll()) 
             .then(receivedAuthors => {
                 expect(receivedAuthors).toContainEqual(createdAuthors[1]);
                 expect(receivedAuthors).toContainEqual(createdAuthors[2]);
