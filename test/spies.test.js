@@ -49,9 +49,21 @@ describe('spies model', () => {
                 return Spies.update(receivedSpy._id, { weapon: 'Rocket Launcher', vehicle: 'Cessna' });
             })
             .then(receivedSpy => {
-                expect(receivedSpy).toContainEqual({ weapon: 'Rocket Launcher', vehicle: 'Cessna' });
+                expect(receivedSpy).toEqual({ ...createdSpies[0], weapon: 'Rocket Launcher', vehicle: 'Cessna' });
             });
-
-
     });
+
+    it('kills a spy', () => {
+
+        return Spies.delete(createdSpies[0]._id)
+            .then(receivedSpy => {
+                return Spies.get(receivedSpy._id);
+            })
+            .then(receivedSpy => {
+                expect(receivedSpy).toBeNull();
+            });
+    });
+
+
+
 });
