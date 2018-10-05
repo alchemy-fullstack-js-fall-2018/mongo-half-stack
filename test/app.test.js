@@ -4,11 +4,11 @@ const app = require('../lib/app');
 const Spies = require('../lib/models/Spies');
 const Villains = require('../lib/models/Villains');
 
-describe.skip('Spies and Villains', () => {
+describe('Spies and Villains', () => {
     const spies = [
-        { name: 'James Bond', weapon: 'PP9', vehicle: 'Aston Martin'},
-        { name: 'Jack Ryan', weapon: 'Glock 19', vehicle: 'Bike'},
-        { name: 'Jason Bourne', weapon: 'Fists', vehicle: 'Feet'}
+        { name: 'James Bond', weapon: 'PP9', vehicle: 'Aston Martin' },
+        { name: 'Jack Ryan', weapon: 'Glock 19', vehicle: 'Bike' },
+        { name: 'Jason Bourne', weapon: 'Fists', vehicle: 'Feet' }
     ];
 
     let createdSpies;
@@ -25,7 +25,9 @@ describe.skip('Spies and Villains', () => {
     beforeEach(() => {
         return Promise.all(spies.map(creator))
             .then(cs => {
+                console.log(cs);
                 createdSpies = cs.map(s => s.body);
+                console.log(createdSpies);
             });
     });
 
