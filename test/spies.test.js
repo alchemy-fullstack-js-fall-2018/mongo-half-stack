@@ -34,4 +34,14 @@ describe('spies model', () => {
                 expect(receivedSpy).toEqual(createdSpies[0]);
             });
     });
+
+    it('gets all spies', () => {
+
+        return Spies.getAll()
+            .then(receivedSpies => {
+                expect(receivedSpies).toHaveLength(3);
+            })
+
+
+    });
 });
