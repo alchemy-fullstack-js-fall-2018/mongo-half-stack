@@ -41,10 +41,17 @@ describe('dog bird farm for dogs and birds', () => {
             });
     });
 
-    it('retrieves a dog in our db by id', () => {
+    it('"retrieves" a dog in our db by id', () => {
         return request(app).get(`/dogs/${createdDogs[0]._id}`)
             .then(res => {
                 expect(res.body).toEqual(createdDogs[0]);
+            });
+    });
+
+    it('"retrieves" all dogs in our db', () => {
+        return request(app).get('/dogs').set('Accept', 'application/json')
+            .then(res => {
+                expect(res.body).toEqual(createdDogs);
             });
     });
 
