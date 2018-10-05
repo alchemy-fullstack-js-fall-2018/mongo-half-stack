@@ -5,9 +5,9 @@ describe('rodents model', () => {
    
     let createdRodents; 
 
-    // beforeEach(() => {
-    //     return Rodents.drop();
-    // });
+    beforeEach(() => {
+        return Rodents.drop();
+    });
 
     beforeEach(() => {
         return Promise.all([
