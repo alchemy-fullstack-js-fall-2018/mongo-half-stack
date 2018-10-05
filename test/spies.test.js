@@ -36,11 +36,21 @@ describe('spies model', () => {
     });
 
     it('gets all spies', () => {
-
         return Spies.getAll()
             .then(receivedSpies => {
                 expect(receivedSpies).toHaveLength(3);
+            });
+    });
+
+    it('udpates a spy by id', () => {
+
+        return Spies.get(createdSpies[0]._id)
+            .then(receivedSpy => {
+                return Spies.update(receivedSpy._id, { weapon: 'Rocket Launcher', vehicle: 'Cessna' });
             })
+            .then(receivedSpy => {
+                expect(receivedSpy).toContainEqual({ weapon: 'Rocket Launcher', vehicle: 'Cessna' });
+            });
 
 
     });
