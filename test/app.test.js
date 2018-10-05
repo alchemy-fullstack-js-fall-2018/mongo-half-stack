@@ -14,7 +14,8 @@ describe('Spies and Villains', () => {
     let createdSpies;
 
     const creator = spy => {
-        return request(app).post('/spies')
+        return request(app)
+            .post('/spies')
             .send(spy);
     };
 
@@ -30,20 +31,35 @@ describe('Spies and Villains', () => {
     });
 
     it('get a spy by id', () => {
-        return request(app).get(`/spies/${createdSpies[0]._id}`)
+        return request(app)
+            .get(`/spies/${createdSpies[0]._id}`)
             .then(res => {
                 expect(res.body).toEqual(createdSpies[0]);
             });
     });
 
     it('gets all spies', () => {
-        return request(app).get('/spies').set('Accept', 'application/json').then(res => {
-            expect(res.body).toEqual(createdSpies);
-        });
+        return request(app)
+            .get('/spies')
+            .set('Accept', 'application/json')
+            .then(res => {
+                expect(res.body).toEqual(createdSpies);
+            });
+    });
+
+    it('gets all spies that meet certain criteria', () => {
+        return request(app)
+            .get('/spies')
+            .query({ name: 'James' })
+            .set('Accept', 'application/json')
+            .then(res => {
+                expect(res.body).toEqual(createdSpies);
+            });
     });
 
     it('create a spy', () => {
-        return request(app).post('/spies')
+        return request(app)
+            .post('/spies')
             .send({ name: 'Johnny English', weapon: 'Incompetence', vehicle: 'Parachute' })
             .then(res => {
                 expect(res.body).toEqual({
@@ -56,17 +72,15 @@ describe('Spies and Villains', () => {
     });
 
     it('kills a spy', () => {
-        return request(app).delete(`/spies/${createdSpies[0]._id}`)
-            .then(deadSpy => {
-                return request(app).get(`/spies/${deadSpy.body._id}`);
-            })
-            .then(res => {
-                expect(res.body).toBeNull();
-            });
+        return request(app)
+            .delete(`/spies/${createdSpies[0]._id}`)
+            .then(deadSpy => request(app).get(`/spies/${deadSpy.body._id}`))
+            .then(res => expect(res.body).toBeNull());
     });
 
     it('turns 007 into 008 (updates a spy)', () => {
-        return request(app).put(`/spies/${createdSpies[0]._id}`)
+        return request(app)
+            .put(`/spies/${createdSpies[0]._id}`)
             .send({ weapon: 'Seduction', vehicle: 'Love Boat' })
             .then(res => {
                 expect(res.body).toEqual({
@@ -76,11 +90,6 @@ describe('Spies and Villains', () => {
                     vehicle: 'Love Boat'
                 });
             });
-
-
-
-
-
     });
 
     it('returns 404 when there is no method', () => {
@@ -93,8 +102,10 @@ describe('Spies and Villains', () => {
     });
 
     it('returns 404 when there is no route', () => {
-        return request(app).get('/shelter').then(res => {
-            expect(res.statusCode).toEqual(404);
-        });
+        return request(app)
+            .get('/shelter')
+            .then(res => {
+                expect(res.statusCode).toEqual(404);
+            });
     });
 });
