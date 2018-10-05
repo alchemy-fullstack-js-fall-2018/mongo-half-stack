@@ -1,16 +1,15 @@
 /* eslint no-console: off */
+
 require('dotenv').config();
-const db = require('./lib/mongo-connection');
 const app = require('./lib/app');
-const middleware = require('./lib/middleware/middleware');
-const Tweets = require('./lib/models/tweets');
+const http = require('http');
 
-app.use(middleware.jsonHeader);
-app.use(middleware.requestLogger);
-app.use(middleware.responseBodySend);
-app.use(middleware.resourceHandler);
-app.use(middleware.bodyParser);
+const server = http.createServer(app);
 
-app.resource(new Tweets(db));
+const PORT = 7890;
 
-app.start(7890);
+server.listen(PORT, () => {
+    console.log('server running on', server.address().port);
+});
+
+
