@@ -18,16 +18,6 @@ describe('spies model', () => {
             .then(cs => createdSpies = cs);
     });
 
-    it('creates a new spy in my db', () => {
-        return Spies.create('Johnny English', 'Incompetence', 'Parachute')
-            .then(createdSpy => {
-                expect(createdSpy).toHaveProperty('_id');
-                expect(createdSpy.name).toEqual('Johnny English');
-                expect(createdSpy.weapon).toEqual('Incompetence');
-                expect(createdSpy.vehicle).toEqual('Parachute');
-            });
-    });
-
     it('gets a spy by id', () => {
         return Spies.get(createdSpies[0]._id)
             .then(receivedSpy => {
@@ -39,6 +29,16 @@ describe('spies model', () => {
         return Spies.getAll()
             .then(receivedSpies => {
                 expect(receivedSpies).toHaveLength(3);
+            });
+    });
+
+    it('creates a new spy in my db', () => {
+        return Spies.create('Johnny English', 'Incompetence', 'Parachute')
+            .then(createdSpy => {
+                expect(createdSpy).toHaveProperty('_id');
+                expect(createdSpy.name).toEqual('Johnny English');
+                expect(createdSpy.weapon).toEqual('Incompetence');
+                expect(createdSpy.vehicle).toEqual('Parachute');
             });
     });
 
