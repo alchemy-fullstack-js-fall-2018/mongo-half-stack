@@ -1,7 +1,7 @@
 require('dotenv').config();
 const Villains = require('../lib/models/Villains');
 
-describe('spies model', () => {
+describe('Villains model', () => {
 
     let createdVillains;
 
@@ -34,6 +34,30 @@ describe('spies model', () => {
         return Villains.get(createdVillains[0]._id)
             .then(receivedVillain => {
                 expect(receivedVillain).toEqual(createdVillains[0]);
+            });
+    });
+
+    it('gets all villains', () => {
+        return Villains.getAll()
+            .then(recievedVillains => {
+                expect(recievedVillains).toHaveLength(3);
+            });
+    });
+
+    it('udpates a villian by id', () => {
+        return Villains.update(createdVillains[0]._id, { weapon: 'Rocket Launcher', motive: 'jealousy' })
+            .then(updatedVillian => {
+                expect(updatedVillian).toEqual({ ...createdVillains[0], weapon: 'Rocket Launcher', motive: 'jealousy' });
+            });
+    });
+
+    it('kills a villian', () => {
+        return Villains.delete(createdVillains[0]._id)
+            .then(receivedVillian => {
+                return Villains.get(receivedVillian._id);
+            })
+            .then(receivedVillian => {
+                expect(receivedVillian).toBeNull();
             });
     });
 });

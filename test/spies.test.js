@@ -43,18 +43,13 @@ describe('spies model', () => {
     });
 
     it('udpates a spy by id', () => {
-
-        return Spies.get(createdSpies[0]._id)
-            .then(receivedSpy => {
-                return Spies.update(receivedSpy._id, { weapon: 'Rocket Launcher', vehicle: 'Cessna' });
-            })
+        return Spies.update(createdSpies[0]._id, { weapon: 'Rocket Launcher', vehicle: 'Cessna' })
             .then(receivedSpy => {
                 expect(receivedSpy).toEqual({ ...createdSpies[0], weapon: 'Rocket Launcher', vehicle: 'Cessna' });
             });
     });
 
     it('kills a spy', () => {
-
         return Spies.delete(createdSpies[0]._id)
             .then(receivedSpy => {
                 return Spies.get(receivedSpy._id);
@@ -63,7 +58,4 @@ describe('spies model', () => {
                 expect(receivedSpy).toBeNull();
             });
     });
-
-
-
 });
