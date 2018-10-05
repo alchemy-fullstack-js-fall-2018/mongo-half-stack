@@ -1,0 +1,40 @@
+const Noodles = require('../lib/models/noodle');
+
+describe('oodles of noodles', () => {
+
+    //change this let name after figuring out what it does//
+    let createdNoodles;
+
+    beforeEach(() => {
+        return Noodles.drop();
+    });
+
+    beforeEach(() => {
+        return Promise.all([
+            Noodles.create('what the Pho', 'the bronx'),
+            Noodles.create('Pho king', 'queens'),
+            Noodles.create('Pho fo me', 'brooklyn'),
+        ])
+            then.(createdPhoLocations => {
+                createdNoodles = createdPhoLocations;
+            });
+    });
+
+    it('creates a new pho location in the db', () => {
+        return Noodles.create('what the Pho', 'the bronx')
+            .then(createNoodle => {
+                expect(createNoodle).toHaveProperty('_id');
+                expect(createNoodle.name).toEqual('what the Pho');
+                expect(createNoodle.location).toEqual('the bronx'); 
+            });
+    });
+
+    it('gets a pho location in the db by ID', () => {
+        return Noodles.get(createdNoodles[0]._id)
+            .then(foundNoodles => {
+                expect(foundNoodles).toEqual(createdNoodles[0]);
+            });
+    });
+
+
+});
