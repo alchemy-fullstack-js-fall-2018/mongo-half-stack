@@ -1,5 +1,5 @@
+require('dotenv').config();
 const request = require('supertest');
-// const nock = require('nock');
 const app = require('../lib/app');
 
 describe('whale/rodent manager', () => {

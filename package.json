@@ -1,7 +1,6 @@
 {
   "name": "mongo-half-stack",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "directories": {
     "lib": "lib",
@@ -33,5 +32,6 @@
   "dependencies": {
     "dotenv": "^6.0.0",
     "mongo": "^0.1.0"
-  }
+  },
+  "description": ""
 }
