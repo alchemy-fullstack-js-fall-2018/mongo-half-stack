@@ -10,5 +10,5 @@ const server = http.createServer(app);
 const PORT = 9111;
 
 server.listen(PORT, () => {
-    console.log('server running on', server.address().port);
+    console.log('server is running ', server.address().port);
 });

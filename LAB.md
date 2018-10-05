@@ -1,7 +1,7 @@
 Mongo Half Stack App
 ======
 
-## Directions
+## Direction
 
 This is a **paired** lab.
 
