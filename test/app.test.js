@@ -9,12 +9,13 @@ describe('dog bird farm for dogs and birds', () => {
 
     it('creates a new dog in our db', () => {
         return request(app).post('/dogs')
-            .send('tito', 'pitbull')
+            .send({ name: 'tito', breed: 'pitbull' })
             .then(res => {
-                const json = JSON.parse(res);
-                expect(json).toHaveProperty('_id');
-                expect(json.name).toEqual('tito');
-                expect(json.breed).toEqual('pitbull');
+                expect(res.body).toEqual({
+                    _id: expect.any(String),
+                    name: 'tito',
+                    breed: 'pitbull'
+                });
             });
     });
 
