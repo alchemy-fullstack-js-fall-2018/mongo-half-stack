@@ -30,4 +30,11 @@ describe('rodents model', () => {
             });
     });
 
+    it('gets a rodent by its id', () => {
+        return Rodents.get(createdRodents[0]._id)
+            .then(receivedRodent => {
+                expect(receivedRodent).toEqual(createdRodents[0]);
+            });
+    });
+
 });
