@@ -63,4 +63,11 @@ describe('dog bird farm for dogs and birds', () => {
             });
     });
 
+    it('deletes a dog', () => {
+        return request(app).delete(`/dogs/${createdDogs[0]._id}`)
+            .then(res => {
+                expect(res.body).toEqual({ removed: true });
+            });
+    });
+
 });
