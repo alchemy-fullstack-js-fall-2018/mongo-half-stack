@@ -37,4 +37,11 @@ describe('rodents model', () => {
             });
     });
 
+    it('gets all rodents in an array', () => {
+        return Rodents.getAll()
+            .then(rodentsArr => {
+                expect(rodentsArr).toEqual(createdRodents);
+            });
+    });
+
 });
