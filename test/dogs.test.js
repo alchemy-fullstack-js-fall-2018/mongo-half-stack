@@ -48,4 +48,11 @@ describe('Dogs model', () => {
                 expect(receivedDog).toEqual({ ...createdDogs[0], name: 'Batman' });
             });
     });
+
+    it('deletes a dog by id', () => {
+        return Dogs.delete(createdDogs[0]._id)
+            .then(result => {
+                expect(result.removed).toEqual(true);
+            });
+    });
 });
