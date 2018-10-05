@@ -7,8 +7,8 @@ describe('dog bird farm for dogs and birds', () => {
 
     // let createdBirds;
     const dogs = [
-        { name: 'bruce', breed: 'poodle' },
-        { name: 'fluffy', breed: 'pomeranian' }
+        { name: 'Bruce', breed: 'Poodle' },
+        { name: 'Fluffy', breed: 'Pomeranian' }
     ];
     
     let createdDogs;
@@ -31,12 +31,12 @@ describe('dog bird farm for dogs and birds', () => {
 
     it('creates a new dog in our db', () => {
         return request(app).post('/dogs')
-            .send({ name: 'tito', breed: 'pitbull' })
+            .send({ name: 'Tito', breed: 'Pitbull' })
             .then(res => {
                 expect(res.body).toEqual({
                     _id: expect.any(String),
-                    name: 'tito',
-                    breed: 'pitbull'
+                    name: 'Tito',
+                    breed: 'Pitbull'
                 });
             });
     });
@@ -52,6 +52,14 @@ describe('dog bird farm for dogs and birds', () => {
         return request(app).get('/dogs').set('Accept', 'application/json')
             .then(res => {
                 expect(res.body).toEqual(createdDogs);
+            });
+    });
+
+    it('changes a dog', () => {
+        return request(app).put(`/dogs/${createdDogs[0]._id}`)
+            .send({ name: 'Batman' })
+            .then(res => {
+                expect(res.body).toEqual({ ...createdDogs[0], name: 'Batman' });
             });
     });
 
