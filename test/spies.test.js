@@ -51,8 +51,8 @@ describe('spies model', () => {
 
     it('kills a spy', () => {
         return Spies.delete(createdSpies[0]._id)
-            .then(receivedSpy => {
-                return Spies.get(receivedSpy._id);
+            .then(deadSpy => {
+                return Spies.get(deadSpy._id);
             })
             .then(receivedSpy => {
                 expect(receivedSpy).toBeNull();
