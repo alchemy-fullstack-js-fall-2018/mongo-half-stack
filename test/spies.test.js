@@ -20,16 +20,12 @@ describe('spies model', () => {
 
     it('gets a spy by id', () => {
         return Spies.get(createdSpies[0]._id)
-            .then(receivedSpy => {
-                expect(receivedSpy).toEqual(createdSpies[0]);
-            });
+            .then(receivedSpy => expect(receivedSpy).toEqual(createdSpies[0]));
     });
 
     it('gets all spies', () => {
         return Spies.getAll()
-            .then(receivedSpies => {
-                expect(receivedSpies).toHaveLength(3);
-            });
+            .then(receivedSpies => expect(receivedSpies).toHaveLength(3));
     });
 
     it('creates a new spy in my db', () => {
