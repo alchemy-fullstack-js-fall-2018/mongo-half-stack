@@ -57,7 +57,6 @@ describe('whale/rodent manager', () => {
     it('APP gets all rodents in an array', () => {
         return request(app).get('/rodents')
             .then(res => {
-                console.log(res.body);
                 expect(res.body).toEqual(createdRodents);
             });            
     });
@@ -65,7 +64,6 @@ describe('whale/rodent manager', () => {
     it('APP deletes a rodent by id', () => {
         return request(app).delete(`/rodents/${createdRodents[0]._id}`)
             .then(res => {
-                console.log(res.body);
                 expect(res.body).toEqual({ removed: true });
             });
 
