@@ -22,7 +22,7 @@ Keep track of your spies and villains with this handy E2E-tested server app.
 
 The resources available in this app have the same exact methods. All of the following methods may be applied to `/spies` or `/villains`.
 
-#### [Spy properties](#spy)
+#### Spy properties[](#spy)
 
 Name | Type | Description
 ------------ | ------------- | --------------
