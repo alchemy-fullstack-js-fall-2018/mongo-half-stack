@@ -25,34 +25,26 @@ describe('Spies and Villains', () => {
 
     beforeEach(() => {
         return Promise.all(spies.map(creator))
-            .then(cs => {
-                createdSpies = cs.map(s => s.body);
-            });
+            .then(cs => createdSpies = cs.map(s => s.body));
     });
 
     it('get a spy by id', () => {
         return request(app)
             .get(`/spies/${createdSpies[0]._id}`)
-            .then(res => {
-                expect(res.body).toEqual(createdSpies[0]);
-            });
+            .then(res => expect(res.body).toEqual(createdSpies[0]));
     });
 
     it('gets all spies', () => {
         return request(app)
             .get('/spies')
-            .then(res => {
-                expect(res.body).toEqual(createdSpies);
-            });
+            .then(res => expect(res.body).toEqual(createdSpies));
     });
 
     it('gets all spies that meet certain criteria', () => {
         return request(app)
             .get('/spies')
             .query({ name: 'James Bond' })
-            .then(res => {
-                expect(res.body).toEqual([createdSpies[0]]);
-            });
+            .then(res => expect(res.body).toEqual([createdSpies[0]]));
     });
 
     it('create a spy', () => {
@@ -94,16 +86,12 @@ describe('Spies and Villains', () => {
         return request(app)
             .patch('/spies')
             .send({})
-            .then(res => {
-                expect(res.statusCode).toEqual(404);
-            });
+            .then(res => expect(res.statusCode).toEqual(404));
     });
 
     it('returns 404 when there is no route', () => {
         return request(app)
             .get('/shelter')
-            .then(res => {
-                expect(res.statusCode).toEqual(404);
-            });
+            .then(res => expect(res.statusCode).toEqual(404));
     });
 });

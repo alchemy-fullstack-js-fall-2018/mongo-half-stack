@@ -44,18 +44,12 @@ describe('spies model', () => {
 
     it('udpates a spy by id', () => {
         return Spies.update(createdSpies[0]._id, { weapon: 'Rocket Launcher', vehicle: 'Cessna' })
-            .then(receivedSpy => {
-                expect(receivedSpy).toEqual({ ...createdSpies[0], weapon: 'Rocket Launcher', vehicle: 'Cessna' });
-            });
+            .then(receivedSpy => expect(receivedSpy).toEqual({ ...createdSpies[0], weapon: 'Rocket Launcher', vehicle: 'Cessna' }));
     });
 
     it('kills a spy', () => {
         return Spies.delete(createdSpies[0]._id)
-            .then(deadSpy => {
-                return Spies.get(deadSpy._id);
-            })
-            .then(receivedSpy => {
-                expect(receivedSpy).toBeNull();
-            });
+            .then(deadSpy => Spies.get(deadSpy._id))
+            .then(receivedSpy => expect(receivedSpy).toBeNull());
     });
 });
