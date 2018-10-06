@@ -4,7 +4,7 @@ const app = require('../lib/app');
 const Spies = require('../lib/models/Spies');
 const Villains = require('../lib/models/Villains');
 
-describe('Spies', () => {
+describe('Spies and Villains', () => {
 
     const spies = [
         { name: 'James Bond', weapon: 'PP9', vehicle: 'Aston Martin' },
@@ -121,7 +121,6 @@ describe('Spies', () => {
         });
     });
 
-
     describe('update routes', () => {
         it('turns 007 into 008 (updates a spy)', () => {
             const additions = { weapon: 'Seduction', vehicle: 'Love Boat' };
@@ -148,18 +147,20 @@ describe('Spies', () => {
                 .then(res => expect(res.statusCode).toEqual(404));
         });
 
-        it('returns 404 when there is no method', () => {
+        it('returns 404 when there is no spy method', done => {
             return request(app)
                 .patch('/spies')
                 .send({})
-                .then(res => expect(res.statusCode).toEqual(404));
+                .then(res => expect(res.statusCode).toEqual(404))
+                .then(() => done());
         });
 
-        it('returns 404 when there is no method', () => {
+        it('returns 404 when there is no villain method', done => {
             return request(app)
                 .patch('/villains')
                 .send({})
-                .then(res => expect(res.statusCode).toEqual(404));
+                .then(res => expect(res.statusCode).toEqual(404))
+                .then(() => done());
         });
     });
 });
