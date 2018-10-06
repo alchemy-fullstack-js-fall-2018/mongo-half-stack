@@ -41,7 +41,6 @@ describe('Spies and Villains', () => {
     it('gets all spies', () => {
         return request(app)
             .get('/spies')
-            .set('Accept', 'application/json')
             .then(res => {
                 expect(res.body).toEqual(createdSpies);
             });
@@ -50,10 +49,9 @@ describe('Spies and Villains', () => {
     it('gets all spies that meet certain criteria', () => {
         return request(app)
             .get('/spies')
-            .query({ name: 'James' })
-            .set('Accept', 'application/json')
+            .query({ name: 'James Bond' })
             .then(res => {
-                expect(res.body).toEqual(createdSpies);
+                expect(res.body).toEqual([createdSpies[0]]);
             });
     });
 
