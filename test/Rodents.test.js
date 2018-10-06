@@ -35,7 +35,6 @@ describe('rodents model', () => {
     it.skip('MODEL gets a rodent by its id', () => {
         return Rodents.get(createdRodents[0]._id)
             .then(receivedRodent => {
-                console.log(receivedRodent);
                 expect(receivedRodent).toEqual(createdRodents[0]);
             });
     });
@@ -48,10 +47,9 @@ describe('rodents model', () => {
     });
 
     it('MODEL changes a rodent by its id', () => {
-        return Rodents.update(createdRodents[3]._id, { status: 'Very, very real'} )
+        return Rodents.update(createdRodents[3]._id, { status: 'Very, very real' })
             .then(updatedRodent => {
-                console.log(updatedRodent);
-                expect(updatedRodent).toEqual({ ...createdRodents[3], status: 'Very, very real'});
+                expect(updatedRodent).toEqual({ ...createdRodents[3], status: 'Very, very real' });
             });
     });
 

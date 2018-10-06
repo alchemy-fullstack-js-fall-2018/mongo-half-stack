@@ -4,7 +4,6 @@ const app = require('../lib/app');
 const Rodents = require('../lib/models/Rodents');
 
 describe('whale/rodent manager', () => {
-    let deerMouse = { species: 'Ixtlán Deer Mouse', status: 'Threatened' };
     
     const rodents = [
         { species: 'Nelson\'s Woodrat', status: 'Threatened' },
