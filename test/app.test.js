@@ -6,15 +6,27 @@ const Rodents = require('../lib/models/Rodents');
 describe('whale/rodent manager', () => {
     let deerMouse = { species: 'Ixtlán Deer Mouse', status: 'Threatened' };
     
+    const rodents = [
+        { species: 'Nelson\'s Woodrat', status: 'Threatened' },
+        { species: 'Bavarian Pine Vole', status: 'Threatened' },
+        { species: 'Kashmir Flying Squirrel', status: 'Least Concern' }
+    ];
+
+    let createdRodents;
+
+    const creator = rodent => {
+        return request(app).post('/rodents')
+            .send(rodent);
+    };
+    
     beforeEach(() => {
         Rodents.drop();
     });
 
     beforeEach(() => {
-        return request(app).post('/rodents')
-            .send(deerMouse)
-            .then(newDeerMouse => {
-                deerMouse = newDeerMouse.body;
+        return Promise.all(rodents.map(creator))
+            .then(rs => {
+                createdRodents = rs.map(r => r.body);
             });
     });
 
@@ -43,16 +55,20 @@ describe('whale/rodent manager', () => {
     });
 
     it('APP gets all rodents in an array', () => {
-        let chinchilla = { species: 'Bolivian Chinchilla Rat', status: 'Threatened' };
         return request(app).post('/rodents')
-            .send(chinchilla)
-            .then(createRes => {
-                chinchilla = createRes.body;
-                return request(app).get('/rodents'); 
-            })
-            .then(getRes => {
-                expect(getRes.body).toEqual([deerMouse, chinchilla]);
+            .then(res => {
+                console.log(res.body);
+                expect(res.body).toEqual(createdRodents);
+            });            
+    });
+
+    it('APP deletes a rodent by id', () => {
+        return request(app).delete(`/rodents/${createdRodents[0]._id}`)
+            .then(res => {
+                console.log(res.body);
+                expect(res.body).toEqual({ removed: true });
             });
+
     });
 
 });

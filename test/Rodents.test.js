@@ -30,9 +30,12 @@ describe('rodents model', () => {
             });
     });
 
+
+    //something weird with this test is making it fail some of the time
     it('MODEL gets a rodent by its id', () => {
         return Rodents.get(createdRodents[0]._id)
             .then(receivedRodent => {
+                console.log(receivedRodent);
                 expect(receivedRodent).toEqual(createdRodents[0]);
             });
     });
