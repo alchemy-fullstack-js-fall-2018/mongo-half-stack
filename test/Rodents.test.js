@@ -21,7 +21,7 @@ describe('rodents model', () => {
             });
     });
 
-    it('creates a rodent in our db', () => {
+    it('MODEL creates a rodent in our db', () => {
         return Rodents.create('Mexican Agouti', 'Threatened')
             .then(createdRodent => {
                 expect(createdRodent).toHaveProperty('_id');
@@ -37,11 +37,17 @@ describe('rodents model', () => {
             });
     });
 
-    it('gets all rodents in an array', () => {
+    it('MODEL gets all rodents in an array', () => {
         return Rodents.getAll()
             .then(rodentsArr => {
                 expect(rodentsArr).toEqual(createdRodents);
             });
     });
 
+    it('MODEL deletes a rodent by id', () => {
+        return Rodents.delete(createdRodents[1]._id)
+            .then(res => {
+                expect(res.removed).toEqual(true);
+            });
+    });
 });
