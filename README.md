@@ -4,14 +4,14 @@ Keep track of your spies and villains with this handy E2E-tested server app powe
 
 ## Table of Contents
 * [Classes](#classes)
-    * [Spies](#spy-properties)
-    * [Villains](#villain-properties)
+    * [Spies](#class-spies)
+    * [Villains](#class-villains)
 * [Methods](#methods)
     * [get](#method-getid)
-    * [getAll](#getAll)
-    * [create](#create)
-    * [update](#update)
-    * [delete](#delete)
+    * [getAll](#method-getallquery)
+    * [create](#method-createdata)
+    * [update](#method-updateid-data)
+    * [delete](#method-deleteid)
 * [Usage](#usage)
 * [Notes](#notes)
 
