@@ -61,6 +61,15 @@ describe('whale/rodent manager', () => {
             });            
     });
 
+    it('APP updates a rodent by id', () => {
+        return request(app).put(`/rodents/${createdRodents[2]._id}`)
+            .send({ status: 'Vulnerable' })
+            .then(res => {
+                console.log(res.body);
+                expect(res.body).toEqual({ ...createdRodents[2], status: 'Vulnerable' });
+            });
+    });
+
     it('APP deletes a rodent by id', () => {
         return request(app).delete(`/rodents/${createdRodents[0]._id}`)
             .then(res => {
