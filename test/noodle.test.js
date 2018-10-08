@@ -1,4 +1,5 @@
-const Noodles = require('../lib/models/noodle');
+require('dotenv').config();
+const Noodles = require('../lib/models/Noodle');
 
 describe('oodles of noodles', () => {
 
@@ -13,9 +14,9 @@ describe('oodles of noodles', () => {
         return Promise.all([
             Noodles.create('what the Pho', 'the bronx'),
             Noodles.create('Pho king', 'queens'),
-            Noodles.create('Pho fo me', 'brooklyn'),
+            Noodles.create('Pho fo me', 'brooklyn')
         ])
-            then.(createdPhoLocations => {
+            .then(createdPhoLocations => {
                 createdNoodles = createdPhoLocations;
             });
     });

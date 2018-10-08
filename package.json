@@ -28,6 +28,8 @@
     "supertest": "^3.3.0"
   },
   "dependencies": {
+    "dotenv": "^6.0.0",
+    "mongo": "^0.1.0",
     "uuid": "^3.3.2"
   }
 }
