@@ -42,7 +42,7 @@ describe('whales model', () => {
             });
     });
 
-    it('MODEL changes a rodent by its id', () => {
+    it('MODEL changes a whale by its id', () => {
         return Whales.update(createdWhales[0]._id, { species: 'Grey Whale' })
             .then(updatedWhale => {
                 expect(updatedWhale).toEqual({ ...createdWhales[0], species: 'Grey Whale' });

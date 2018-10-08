@@ -75,7 +75,6 @@ describe('rodent manager', () => {
             .then(res => {
                 expect(res.body).toEqual({ removed: true });
             });
-
     });
 
 });
@@ -128,6 +127,27 @@ describe('whale manager', () => {
                 const whale = getRes.body;
                 expect(whale._id).toEqual(expect.any(String));
             });
+    });
 
-    })
-})
+    it('APP gets all whales in an array', () => {
+        return request(app).get('/whales')
+            .then(res => {
+                expect(res.body).toEqual(createdWhales);
+            });            
+    });
+
+    it('APP updates a rodent by id', () => {
+        return request(app).put(`/whales/${createdWhales[2]._id}`)
+            .send({ status: 'Vulnerable' })
+            .then(res => {
+                expect(res.body).toEqual({ ...createdWhales[2], status: 'Vulnerable' });
+            });
+    });
+
+    it('APP deletes a whale by id', () => {
+        return request(app).delete(`/whales/${createdWhales[0]._id}`)
+            .then(res => {
+                expect(res.body).toEqual({ removed: true });
+            });
+    });
+});
