@@ -7,10 +7,11 @@ describe('noodles and their restaurant', () => {
         return request(app).post('/noodles')
             .send({ name: 'what the Pho', location: 'the bronx' })
             .then(res => {
-                const json = JSON.parse(res.text);
-                expect(json.id).toEqual(expect.any(String));
-                expect(json.name).toEqual('what the Pho');
-                expect(json.location).toEqual('the bronx');
+                expect(res.body).toEqual({
+                    _id: expect.any(String),
+                    name: 'what the Pho',
+                    location: 'the bronx'
+                });
             });
     });
 
