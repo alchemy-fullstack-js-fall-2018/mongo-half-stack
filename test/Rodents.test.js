@@ -17,6 +17,7 @@ describe('rodents model', () => {
             Rodents.create('Rodents Of Unusual Size', 'Imaginary')
         ])
             .then(createdRodentsFromPromise => {
+                console.log(createdRodentsFromPromise);
                 createdRodents = createdRodentsFromPromise;
             });
     });
