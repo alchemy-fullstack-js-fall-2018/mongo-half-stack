@@ -32,14 +32,14 @@ describe('rodents model', () => {
 
 
     //something weird with this test is making it fail some of the time
-    it.skip('MODEL gets a rodent by its id', () => {
+    it('MODEL gets a rodent by its id', () => {
         return Rodents.get(createdRodents[0]._id)
             .then(receivedRodent => {
                 expect(receivedRodent).toEqual(createdRodents[0]);
             });
     });
     //same with this one
-    it.skip('MODEL gets all rodents in an array', () => {
+    it('MODEL gets all rodents in an array', () => {
         return Rodents.getAll()
             .then(rodentsArr => {
                 expect(rodentsArr).toEqual(createdRodents);
