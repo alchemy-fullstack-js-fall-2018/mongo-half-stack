@@ -55,4 +55,14 @@ describe('app authors', () => {
             });
     });
 
+    it('deletes an author by id', () => {
+        return request(app).delete(`/authors/${createdAuthors[0]._id}`)
+            .then(() => {
+                return request(app).get(`/authors/${createdAuthors[0]._id}`)
+                    .then(res => {
+                        expect(res.body).toBeFalsy();
+                    });
+            });
+    });
+
 });
