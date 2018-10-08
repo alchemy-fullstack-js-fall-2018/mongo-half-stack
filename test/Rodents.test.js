@@ -17,11 +17,12 @@ describe('rodents model', () => {
             Rodents.create('Rodents Of Unusual Size', 'Imaginary')
         ])
             .then(createdRodentsFromPromise => {
+                console.log(createdRodentsFromPromise);
                 createdRodents = createdRodentsFromPromise;
             });
     });
 
-    it('creates a rodent in our db', () => {
+    it('MODEL creates a rodent in our db', () => {
         return Rodents.create('Mexican Agouti', 'Threatened')
             .then(createdRodent => {
                 expect(createdRodent).toHaveProperty('_id');
@@ -30,18 +31,33 @@ describe('rodents model', () => {
             });
     });
 
+
+    //something weird with this test is making it fail some of the time
     it('MODEL gets a rodent by its id', () => {
         return Rodents.get(createdRodents[0]._id)
             .then(receivedRodent => {
                 expect(receivedRodent).toEqual(createdRodents[0]);
             });
     });
-
-    it('gets all rodents in an array', () => {
+    //same with this one
+    it('MODEL gets all rodents in an array', () => {
         return Rodents.getAll()
             .then(rodentsArr => {
-                expect(rodentsArr).toEqual(createdRodents);
+                expect(rodentsArr.sort()).toEqual(createdRodents.sort());
             });
     });
 
+    it('MODEL changes a rodent by its id', () => {
+        return Rodents.update(createdRodents[3]._id, { status: 'Very, very real' })
+            .then(updatedRodent => {
+                expect(updatedRodent).toEqual({ ...createdRodents[3], status: 'Very, very real' });
+            });
+    });
+
+    it('MODEL deletes a rodent by id', () => {
+        return Rodents.delete(createdRodents[1]._id)
+            .then(res => {
+                expect(res.removed).toEqual(true);
+            });
+    });
 });
