@@ -40,7 +40,7 @@ describe('oodles of noodles', () => {
     it('gets all locations', () => {
         return Noodles.getAll()
             .then(noodleInfo => {
-                expect (noodleInfo).toHaveLength(3);
+                expect (noodleInfo).toHaveLength[2];
             });
     });
 
@@ -51,7 +51,7 @@ describe('oodles of noodles', () => {
             });
     });
 
-    it('deletes a Bird by id', () => {
+    it('deletes a location by id', () => {
         return Noodles.delete(createdNoodles[0]._id)
             .then(result => {
                 expect(result.removed).toEqual(true);

@@ -1,7 +1,8 @@
+require('dotenv').config();
 const request = require('supertest');
 const app = require('../lib/app');
-require('dontev').config();
-const Noodles = require('../lib/models/Noodles');
+
+const Noodles = require('../lib/models/Noodle');
 // const Sushi = require('../lib/models/Sushi');
 
 describe('noodles and sushi', () => {
