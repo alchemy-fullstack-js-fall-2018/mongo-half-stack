@@ -37,5 +37,24 @@ describe('oodles of noodles', () => {
             });
     });
 
+    it('gets all locations', () => {
+        return Noodles.getAll()
+            .then(noodleInfo => {
+                expect (noodleInfo).toHaveLength(3);
+            });
+    });
 
+    it('updates a location by id', () => {
+        return Noodles.update(createdNoodles[0]._id, { name: 'pholong' })
+            .then(receivedNoodles => {
+                expect(receivedNoodles).toEqual({ ...createdNoodles[0], name: 'pholong' });
+            });
+    });
+
+    it('deletes a Bird by id', () => {
+        return Noodles.delete(createdNoodles[0]._id)
+            .then(result => {
+                expect(result.removed).toEqual(true);
+            });
+    });
 });
