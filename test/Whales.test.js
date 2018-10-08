@@ -35,5 +35,26 @@ describe('whales model', () => {
             });
     });
 
+    it('MODEL gets all whales in an array', () => {
+        return Whales.getAll()
+            .then(whalesArr => {
+                expect(whalesArr).toEqual(createdWhales);
+            });
+    });
+
+    it('MODEL changes a rodent by its id', () => {
+        return Whales.update(createdWhales[0]._id, { species: 'Grey Whale' })
+            .then(updatedWhale => {
+                expect(updatedWhale).toEqual({ ...createdWhales[0], species: 'Grey Whale' });
+            });
+    });
+
+    it('MODEL deletes a whale by id', () => {
+        return Whales.delete(createdWhales[1]._id)
+            .then(res => {
+                expect(res.removed).toEqual(true);
+            });
+    });
+
 
 });
