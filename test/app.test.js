@@ -65,7 +65,6 @@ describe('rodent manager', () => {
         return request(app).put(`/rodents/${createdRodents[2]._id}`)
             .send({ status: 'Vulnerable' })
             .then(res => {
-                console.log(res.body);
                 expect(res.body).toEqual({ ...createdRodents[2], status: 'Vulnerable' });
             });
     });

@@ -38,7 +38,7 @@ describe('whales model', () => {
     it('MODEL gets all whales in an array', () => {
         return Whales.getAll()
             .then(whalesArr => {
-                expect(whalesArr).toEqual(createdWhales);
+                expect(whalesArr.sort()).toEqual(createdWhales.sort());
             });
     });
 

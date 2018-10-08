@@ -42,7 +42,7 @@ describe('rodents model', () => {
     it('MODEL gets all rodents in an array', () => {
         return Rodents.getAll()
             .then(rodentsArr => {
-                expect(rodentsArr).toEqual(createdRodents);
+                expect(rodentsArr.sort()).toEqual(createdRodents.sort());
             });
     });
 
