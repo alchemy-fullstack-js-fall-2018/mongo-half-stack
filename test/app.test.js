@@ -41,4 +41,11 @@ describe('app authors', () => {
                 expect(response.body.lastName).toEqual('King');
             });
     });
+
+    it('gets all authors', () => {
+        return request(app).get('/authors').set('Accept', 'application/json').then(res => {
+            expect(res.body).toEqual(createdAuthors);
+        });
+    });
+
 });
