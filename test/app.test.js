@@ -1,5 +1,8 @@
 const request = require('supertest');
 const app = require('../lib/app');
+require('dontev').config();
+const Noodles = require('../lib/models/Noodles');
+const Sushi = require('../lib/models/Sushi');
 
 describe('noodles and their restaurant', () => {
 
@@ -14,5 +17,6 @@ describe('noodles and their restaurant', () => {
                 });
             });
     });
+
 
 }); 
