@@ -150,3 +150,12 @@ describe('whale manager', () => {
             });
     });
 });
+
+describe('404 not found', () => {
+    it('returns 404 not found if no resource found with that id', () =>{
+        return request(app).get('/goats')
+            .then(res => {
+                expect(res.statusCode).toEqual(404);
+            });
+    });
+});

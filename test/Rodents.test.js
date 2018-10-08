@@ -17,7 +17,6 @@ describe('rodents model', () => {
             Rodents.create('Rodents Of Unusual Size', 'Imaginary')
         ])
             .then(createdRodentsFromPromise => {
-                console.log(createdRodentsFromPromise);
                 createdRodents = createdRodentsFromPromise;
             });
     });
@@ -43,7 +42,7 @@ describe('rodents model', () => {
     it('MODEL gets all rodents in an array', () => {
         return Rodents.getAll()
             .then(rodentsArr => {
-                expect(rodentsArr.sort()).toEqual(createdRodents.sort());
+                expect(rodentsArr).toEqual(createdRodents);
             });
     });
 
