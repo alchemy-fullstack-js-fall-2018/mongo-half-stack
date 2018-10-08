@@ -2,8 +2,9 @@ require('dotenv').config();
 const request = require('supertest');
 const app = require('../lib/app');
 const Rodents = require('../lib/models/Rodents');
+const Whales = require('../lib/models/Whales');
 
-describe('whale/rodent manager', () => {
+describe('rodent manager', () => {
     
     const rodents = [
         { species: 'Nelson\'s Woodrat', status: 'Threatened' },
@@ -78,3 +79,55 @@ describe('whale/rodent manager', () => {
     });
 
 });
+
+describe('whale manager', () => {
+    const whales = [
+        { species: 'Bryde\'s Whale', status: 'Data Deficient' },
+        { species: 'Sei Whale', status: 'Threatened' },
+        { species: 'Southern Right Whale', status: 'Least Concern' }
+    ];
+
+    let createdWhales;
+
+    const creator = whale => {
+        return request(app).post('/whales')
+            .send(whale);
+    };
+    
+    beforeEach(() => {
+        Whales.drop();
+    });
+
+    beforeEach(() => {
+        return Promise.all(whales.map(creator))
+            .then(rs => {
+                createdWhales = rs.map(r => r.body);
+            });
+    });
+
+    it('APP creates a whale', () => {
+        return request(app).post('/whales')
+            .send({ species: 'Cuvier\'s Beaked Whale', status: 'Least Concern' })
+            .then(res => {
+                const json = res.body;
+                expect(json.species).toEqual('Cuvier\'s Beaked Whale');
+                expect(json.status).toEqual('Least Concern');
+                expect(json._id).toEqual(expect.any(String));
+            });
+    });
+
+    
+    it('APP gets a whale by its id', () => {
+        return request(app).post('/whales')
+            .send({ species: 'Irawaddy Dolphin', status: 'Threatened' })
+            .then(createRes => {
+                const { _id } = createRes.body;
+                return request(app).get(`/whales/${_id}`);
+            })
+            .then(getRes => {
+                const whale = getRes.body;
+                expect(whale._id).toEqual(expect.any(String));
+            });
+
+    })
+})
