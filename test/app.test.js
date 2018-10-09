@@ -59,7 +59,7 @@ describe('noodles and sushi', () => {
         });
     
         it('updates a location name', () => {
-            return request(app).get(`/noodles/${createdNoodleHouse}[0]._id`)
+            return request(app).put(`/noodles/${createdNoodleHouse}[0]._id`)
                 .send({ name: 'Pho Glory' })
                 .then(res => {
                     expect(res.body).toEqual({ ...createdNoodleHouse[0], name: 'Pho Glory' });
