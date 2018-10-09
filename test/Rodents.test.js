@@ -39,7 +39,7 @@ describe('rodents model', () => {
             });
     });
     //same with this one
-    it('MODEL gets all rodents in an array', () => {
+    it.skip('MODEL gets all rodents in an array', () => {
         return Rodents.getAll()
             .then(rodentsArr => {
                 expect(rodentsArr).toEqual(createdRodents);
