@@ -20,7 +20,7 @@ describe('rodent manager', () => {
     };
     
     beforeEach(() => {
-        Rodents.drop();
+        return Rodents.drop();
     });
 
     beforeEach(() => {
