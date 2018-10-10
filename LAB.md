@@ -1,7 +1,7 @@
 Mongo Half Stack App
 ======
 
-## Directions
+## Direction
 
 This is a **paired** lab.
 
@@ -15,7 +15,7 @@ This is a **paired** lab.
     * `GET /<resource>/:id` -
       * returns the single object specified by the id
       * returns 404 not found if no resource found with that id    
-    * `DELETE /<resource>/:id` - removes the resource with that id (okay if doesn't exist). 
+    * `DELETE /<resource>/:id` - removes the  resource with that id (okay if doesn't exist). 
     * `PUT /<resource>/:id` - updates the resource with supplied request body
 * Use plural name in your url path (`/unicorns`, **not** `/unicorn`)
 
