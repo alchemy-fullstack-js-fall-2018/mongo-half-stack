@@ -45,7 +45,7 @@ describe('noodles and sushi', () => {
         });
         
         it('gets a noodle location by id', () => {
-            return request(app).get(`/noodles/${createdNoodleHouse}[0]._id`)
+            return request(app).get(`/noodles/${createdNoodleHouse[0]._id}`)
                 .then(res => {
                     expect(res.body).toEqual(createdNoodleHouse[0]);
                 });
@@ -54,12 +54,12 @@ describe('noodles and sushi', () => {
         it('gets all noodle locations ', () => {
             return request(app).get('/noodles/').set('Accept', 'application/json')
                 .then(res => {
-                    expect(res.body).toEqual(createdNoodleHouse[0]);
+                    expect(res.body).toEqual(createdNoodleHouse);
                 });
         });
     
         it('updates a location name', () => {
-            return request(app).put(`/noodles/${createdNoodleHouse}[0]._id`)
+            return request(app).put(`/noodles/${createdNoodleHouse[0]._id}`)
                 .send({ name: 'Pho Glory' })
                 .then(res => {
                     expect(res.body).toEqual({ ...createdNoodleHouse[0], name: 'Pho Glory' });
@@ -83,7 +83,7 @@ describe('noodles and sushi', () => {
         });
     
         it('returns 404 when there is no route or a bad route', () => {
-            return request(app).post('/error').then(res => {
+            return request(app).get('/error').then(res => {
                 expect(res.statusCode).toEqual(404);
             });
         });
