@@ -1,0 +1,35 @@
+{
+  "name": "mongo-half-stack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test:run": "jest",
+    "test": "npm run test:run",
+    "test:watch": "npm run test:run -- --watch",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidChhing/mongo-half-stack.git"
+  },
+  "author": "davidhchhing@gmail.com (https://github.com/davidchhing)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidChhing/mongo-half-stack/issues"
+  },
+  "homepage": "https://github.com/DavidChhing/mongo-half-stack#readme",
+  "devDependencies": {
+    "eslint": "^5.6.1",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.4",
+    "supertest": "^3.3.0"
+  },
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "mongo": "^0.1.0",
+    "uuid": "^3.3.2"
+  }
+}
