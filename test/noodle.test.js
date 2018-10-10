@@ -45,7 +45,7 @@ describe('oodles of noodles', () => {
     });
 
     it('updates a location by id', () => {
-        return Noodles.update(createdNoodles[0]._id, 'pholong' )
+        return Noodles.update(createdNoodles[0]._id, 'pholong')
             .then(receivedNoodles => {
                 expect(receivedNoodles).toEqual({ ...createdNoodles[0], name: 'pholong' });
             });
